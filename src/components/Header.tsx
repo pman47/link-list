@@ -17,7 +17,7 @@ const Header: FC<HeaderProps> = ({}) => {
         </div>
         <nav className="flex gap-2 text-sm text-slate-500">
           <Link href={"/login"}>Sign in</Link>
-          <Link href={"/register"}>Create Account</Link>
+          <Link href={"/login"}>Create Account</Link>
         </nav>
       </div>
     </header>
