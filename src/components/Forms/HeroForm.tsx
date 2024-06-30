@@ -1,11 +1,17 @@
 "use client";
 
+import { DefaultSession } from "next-auth";
 import { signIn } from "next-auth/react";
+import { redirect, useRouter } from "next/navigation";
 import { FC, SyntheticEvent } from "react";
 
-interface HeroFormProps {}
+interface HeroFormProps {
+  user: DefaultSession["user"];
+}
 
-const HeroForm: FC<HeroFormProps> = ({}) => {
+const HeroForm: FC<HeroFormProps> = ({ user }) => {
+  const router = useRouter();
+
   const handleSubmit = async (
     e: SyntheticEvent<HTMLFormElement, SubmitEvent>
   ) => {
@@ -14,9 +20,13 @@ const HeroForm: FC<HeroFormProps> = ({}) => {
     const input = form.querySelector("input") as HTMLInputElement;
     const username = input.value;
     if (username.length > 0) {
-      await signIn("google", {
-        callbackUrl: "/account?desiredUsername=" + username,
-      });
+      if (user) {
+        router.push("/account?desiredUsername=" + username);
+      } else {
+        await signIn("google", {
+          callbackUrl: "/account?desiredUsername=" + username,
+        });
+      }
     }
   };
 
