@@ -3,6 +3,7 @@ import grabUsername from "@/actions/grabUsername";
 import { FC, useState } from "react";
 import RightIcon from "../icons/RightIcon";
 import { redirect } from "next/navigation";
+import SubmitButton from "../buttons/SubmitButton";
 
 interface UsernameFormProps {
   desiredUsername: string;
@@ -39,13 +40,10 @@ const UsernameForm: FC<UsernameFormProps> = ({ desiredUsername }) => {
             Taken username
           </div>
         )}
-        <button
-          className="bg-blue-500 text-white py-2 px-4 mx-auto w-full flex gap-2 items-center justify-center"
-          type="submit"
-        >
+        <SubmitButton>
           <span>Claim your username</span>
           <RightIcon />
-        </button>
+        </SubmitButton>
       </div>
     </form>
   );
