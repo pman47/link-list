@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import { Page } from "@/models/Page";
 
 interface AccountProps {
   searchParams: {
@@ -16,6 +17,12 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
 
   if (!session) {
     redirect("/");
+  }
+
+  const page = await Page.findOne({ owner: session.user?.email });
+
+  if (page) {
+    return <div className="">Your page is: /{page.uri}</div>;
   }
 
   return (

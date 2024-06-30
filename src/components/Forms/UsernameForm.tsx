@@ -17,7 +17,7 @@ const UsernameForm: FC<UsernameFormProps> = ({ desiredUsername }) => {
     const result = await grabUsername(formData);
     setTaken(result === false);
     if (result) {
-      redirect("/account/" + username);
+      redirect("/account?created=" + username);
     }
   }
 
