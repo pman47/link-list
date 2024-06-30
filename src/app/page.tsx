@@ -1,3 +1,5 @@
+import HeroForm from "@/components/Forms/HeroForm";
+
 export default function Home() {
   return (
     <main>
@@ -8,22 +10,7 @@ export default function Home() {
             All Your Links in One Place – Effortless Sharing Made Simple
           </h2>
         </div>
-        <form
-          action=""
-          className="inline-flex items-center shadow-lg shadow-gray-700/20"
-        >
-          <span className="bg-white p-4 pr-0">linklist.to/</span>
-          <input
-            type="text"
-            name=""
-            id=""
-            placeholder="username"
-            className="py-4"
-          />
-          <button type="submit" className="bg-blue-500 text-white p-4 px-6">
-            Join for free
-          </button>
-        </form>
+        <HeroForm />
       </section>
     </main>
   );
