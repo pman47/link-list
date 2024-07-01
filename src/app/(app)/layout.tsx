@@ -4,8 +4,8 @@ import { getServerSession } from "next-auth";
 import { Lato } from "next/font/google";
 import Image from "next/image";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import "../globals.css";
+import { authOptions } from "@/lib/auth";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 

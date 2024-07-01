@@ -1,11 +1,11 @@
 import PageSettingsForm from "@/components/Forms/PageSettingsForm";
 import UsernameForm from "@/components/Forms/UsernameForm";
+import { authOptions } from "@/lib/auth";
 import DBConnect from "@/lib/dbConnect";
 import { Page } from "@/models/Page";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FC } from "react";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 interface AccountProps {
   searchParams: {
