@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { FC } from "react";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { Page } from "@/models/Page";
+import DBConnect from "@/lib/dbConnect";
 
 interface AccountProps {
   searchParams: {
@@ -19,6 +20,7 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
     redirect("/");
   }
 
+  await DBConnect();
   const page = await Page.findOne({ owner: session.user?.email });
 
   if (page) {

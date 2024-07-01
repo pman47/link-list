@@ -1,15 +1,14 @@
 "use server";
 
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import DBConnect from "@/lib/dbConnect";
 import { Page } from "@/models/Page";
-import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
-import { redirect } from "next/navigation";
 
 export default async function grabUsername(formData: FormData) {
   const username = formData.get("username");
-  mongoose.connect(process.env.MONGODB_URI!);
 
+  await DBConnect();
   const existingPageDoc = await Page.findOne({
     uri: username,
   });
