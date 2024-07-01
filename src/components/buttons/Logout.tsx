@@ -4,16 +4,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "next-auth/react";
 import { FC } from "react";
 
-interface LogoutButtonProps {}
+interface LogoutButtonProps {
+  className?: string;
+  iconLeft?: boolean;
+  iconClasses?: string;
+}
 
-const LogoutButton: FC<LogoutButtonProps> = ({}) => {
+const LogoutButton: FC<LogoutButtonProps> = ({
+  className = "flex gap-2 items-center border p-2 px-4 shadow rounded",
+  iconLeft = false,
+  iconClasses = "",
+}) => {
   return (
-    <button
-      onClick={() => signOut()}
-      className="flex gap-2 items-center border p-2 px-4 shadow rounded"
-    >
+    <button onClick={() => signOut()} className={className}>
+      {iconLeft && (
+        <FontAwesomeIcon icon={faRightFromBracket} className={iconClasses} />
+      )}
       <span>Logout</span>
-      <FontAwesomeIcon icon={faRightFromBracket} />
+      {!iconLeft && (
+        <FontAwesomeIcon icon={faRightFromBracket} className={iconClasses} />
+      )}
     </button>
   );
 };
