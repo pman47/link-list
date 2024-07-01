@@ -1,10 +1,11 @@
+import PageSettingsForm from "@/components/Forms/PageSettingsForm";
 import UsernameForm from "@/components/Forms/UsernameForm";
+import DBConnect from "@/lib/dbConnect";
+import { Page } from "@/models/Page";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FC } from "react";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
-import { Page } from "@/models/Page";
-import DBConnect from "@/lib/dbConnect";
 
 interface AccountProps {
   searchParams: {
@@ -24,7 +25,7 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
   const page = await Page.findOne({ owner: session.user?.email });
 
   if (page) {
-    return <div className="">Your page is: /{page.uri}</div>;
+    return <PageSettingsForm page={page} />;
   }
 
   return (
