@@ -2,7 +2,7 @@ import UsernameForm from "@/components/Forms/UsernameForm";
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { FC } from "react";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { Page } from "@/models/Page";
 import DBConnect from "@/lib/dbConnect";
 
