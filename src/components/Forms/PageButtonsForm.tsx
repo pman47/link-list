@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import {
   faEnvelope,
+  faGripLines,
   faMobile,
   faPlus,
   faSave,
@@ -24,6 +25,7 @@ import { FC, useMemo, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitButton from "../buttons/SubmitButton";
 import SectionBox from "../layout/SectionBox";
+import { ItemInterface, ReactSortable } from "react-sortablejs";
 
 interface PageButtonsFormProps {
   page: PageType;
@@ -39,9 +41,9 @@ interface Button {
 
 const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
   const pageSavedButtonKeys = Object.keys(page.buttons);
-  const pageSavedButtonInfo = allButtons.filter((button) =>
-    pageSavedButtonKeys.includes(button.key)
-  );
+  const pageSavedButtonInfo = pageSavedButtonKeys
+    .map((buttonKey) => allButtons.find((button) => button.key === buttonKey))
+    .filter((button): button is Button => button !== undefined);
 
   const [activeButton, setActiveButton] =
     useState<Button[]>(pageSavedButtonInfo);
@@ -75,28 +77,37 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
     <SectionBox>
       <form action={saveButtons}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
-        {activeButton.map((b) => (
-          <div className="mb-4 flex items-center">
-            <div className="w-40 flex p-2 gap-2 items-center text-gray-700">
-              <FontAwesomeIcon icon={b.icon} className="h-4 w-4" />
-              <span>{b.label} :</span>
+        <ReactSortable
+          list={activeButton as any}
+          setList={setActiveButton as any}
+        >
+          {activeButton.map((b) => (
+            <div className="mb-4 flex items-center" key={b.key}>
+              <div className="w-52 flex p-2 gap-2 items-center text-gray-700">
+                <FontAwesomeIcon
+                  icon={faGripLines}
+                  className="h-4 w-4 cursor-pointer text-gray-400"
+                />
+                <FontAwesomeIcon icon={b.icon} className="h-4 w-4" />
+                <span>{b.label} :</span>
+              </div>
+              <input
+                type={"text"}
+                style={{ marginBottom: 0 }}
+                placeholder={b.placeholder}
+                name={b.key}
+                defaultValue={page.buttons[b.key]}
+              />
+              <button
+                onClick={() => removeButton(b)}
+                type="button"
+                className="p-2 bg-gray-300 py-2 px-4 cursor-pointer hover:bg-red-300 duration-200"
+              >
+                <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+              </button>
             </div>
-            <input
-              type={"text"}
-              style={{ marginBottom: 0 }}
-              placeholder={b.placeholder}
-              name={b.key}
-              defaultValue={page.buttons[b.key]}
-            />
-            <button
-              onClick={() => removeButton(b)}
-              type="button"
-              className="p-2 bg-gray-300 py-2 px-4 cursor-pointer hover:bg-red-300 duration-200"
-            >
-              <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
-            </button>
-          </div>
-        ))}
+          ))}
+        </ReactSortable>
         {availableButtons.length > 0 && (
           <div className="flex flex-wrap gap-2 mt-4 border-t pt-4">
             {availableButtons.map((b) => (
