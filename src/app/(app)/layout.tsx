@@ -30,7 +30,7 @@ export default async function AppLayout({
       <body className={lato.className}>
         <Toaster />
         <main className="flex min-h-screen">
-          <aside className="bg-white w-48 p-4 shadow">
+          <aside className="bg-white w-48 p-4 pt-8 shadow">
             <div className="rounded-full overflow-hidden w-24 aspect-square mx-auto relative">
               <Image src={session?.user?.image!} alt="avatar" fill />
             </div>
@@ -39,7 +39,7 @@ export default async function AppLayout({
             </div>
           </aside>
           <div className="grow">
-            <div className="bg-white m-4 p-4 shadow">{children}</div>
+            <div className="bg-white m-8 p-4 shadow">{children}</div>
           </div>
         </main>
       </body>

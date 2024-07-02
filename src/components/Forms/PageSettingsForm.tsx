@@ -46,7 +46,7 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
     <div className="-m-4">
       <form action={saveBaseSettings}>
         <div
-          className="p-16 flex justify-center items-center"
+          className="py-4 min-h-[280px] flex justify-center items-center"
           style={{
             backgroundColor: bgColor,
           }}
