@@ -1,9 +1,12 @@
+import { authOptions } from "@/lib/auth";
 import DBConnect from "@/lib/dbConnect";
+import { Event } from "@/models/Event";
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { allButtons } from "@/utils/allButtons";
 import { faLink, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
@@ -25,11 +28,21 @@ function buttonLink(key: string, value: string) {
 }
 
 const UserPage: FC<UserPageProps> = async ({ params }) => {
+  const session = await getServerSession(authOptions);
   const uri = params.uri;
 
   await DBConnect();
   const page = await Page.findOne({ uri });
   const user = await User.findOne({ email: page.owner });
+
+  const isAdmin = session?.user?.email === page?.owner;
+
+  if (!isAdmin) {
+    await Event.create({
+      uri: uri,
+      type: "view",
+    });
+  }
 
   return (
     <div className="bg-blue-950 text-white min-h-screen">
@@ -70,13 +83,14 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
           </Link>
         ))}
       </div>
-      <div className="max-w-2xl mx-auto grid lg:grid-cols-2 gap-6 p-4 px-8">
+      <div className="max-w-4xl mx-auto grid lg:grid-cols-2 gap-6 p-4 px-8">
         {page.links.map((link: Link) => (
           <Link
             target="_blank"
             href={link.url}
             className="bg-indigo-800 p-2 flex"
             key={link.key}
+            ping={"/api/click?url=" + btoa(link.url) + "&isAdmin=" + isAdmin}
           >
             <div className="bg-blue-700 p-1 relative -left-4 flex items-center justify-center w-16 h-16">
               <FontAwesomeIcon icon={faLink} className="w-6 h-6" />
