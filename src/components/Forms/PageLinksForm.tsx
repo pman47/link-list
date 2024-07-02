@@ -1,19 +1,18 @@
 "use client";
+import { savePageLinks } from "@/actions/pageActions";
 import {
-  faCloudArrowUp,
   faGripLines,
-  faLink,
   faPlus,
   faSave,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import { FC, useState } from "react";
-import SectionBox from "../layout/SectionBox";
-import SubmitButton from "../buttons/SubmitButton";
-import { ReactSortable } from "react-sortablejs";
-import { savePageLinks } from "@/actions/pageActions";
 import toast from "react-hot-toast";
+import { ReactSortable } from "react-sortablejs";
+import SubmitButton from "../buttons/SubmitButton";
+import SectionBox from "../layout/SectionBox";
 
 interface PageLinksFormProps {
   page: PageType;
@@ -57,6 +56,10 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
     );
   }
 
+  function removeLink(key: string) {
+    setLinks((prev) => prev.filter((link) => link.key !== key));
+  }
+
   return (
     <SectionBox>
       <form action={save}>
@@ -78,7 +81,7 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
         >
           {links.map((link) => (
             <div
-              className="mt-4 flex gap-2 items-center border-[1px] p-4 rounded-md"
+              className="mt-4 flex gap-6 items-center border-[1px] p-4 rounded-md"
               key={link.key}
             >
               <div className="handle">
@@ -88,6 +91,9 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
                 />
               </div>
               <div className="grow">
+                <label htmlFor="" className="inputLabel">
+                  Title:
+                </label>
                 <input
                   name="title"
                   type="text"
@@ -95,19 +101,35 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
                   onChange={(ev) => handleLinkChange(link.key, "title", ev)}
                   value={link.title}
                 />
+                <label htmlFor="" className="inputLabel">
+                  Sub title:
+                </label>
                 <input
                   type="text"
                   placeholder="subtitle (optional)"
                   onChange={(ev) => handleLinkChange(link.key, "subtitle", ev)}
                   value={link.subtitle}
                 />
+                <label htmlFor="" className="inputLabel">
+                  Url:
+                </label>
                 <input
                   type="text"
                   placeholder="url"
-                  style={{ marginBottom: 0 }}
                   onChange={(ev) => handleLinkChange(link.key, "url", ev)}
                   value={link.url}
                 />
+                <button
+                  type="button"
+                  className="bg-red-100 p-2 h-full flex gap-2 items-center ml-auto rounded border border-red-200"
+                  onClick={() => removeLink(link.key)}
+                >
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="text-black h-4 w-4"
+                  />
+                  <span>Remove this link</span>
+                </button>
               </div>
             </div>
           ))}
