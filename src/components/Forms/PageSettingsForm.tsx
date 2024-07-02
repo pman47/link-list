@@ -1,13 +1,13 @@
 "use client";
+import { savePageSettings } from "@/actions/pageActions";
 import { faImage, faPalette, faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useState } from "react";
+import toast from "react-hot-toast";
 import SubmitButton from "../buttons/SubmitButton";
 import RadioTogglers from "../FormItems/RadioTogglers";
-import { savePageSettings } from "@/actions/pageActions";
-import toast from "react-hot-toast";
 
 interface PageSettingsFormProps {
   page: PageType;
@@ -15,6 +15,9 @@ interface PageSettingsFormProps {
 }
 
 const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
+  const [bgType, setBgType] = useState<"color" | "image">(page.bgType);
+  const [bgColor, setBgColor] = useState<string>(page.bgColor);
+
   async function saveBaseSettings(formData: FormData) {
     const result = await savePageSettings(formData);
     if (result) {
@@ -25,17 +28,41 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
   return (
     <div className="-m-4">
       <form action={saveBaseSettings}>
-        <div className="bg-gray-300 p-16 h-32 flex justify-center items-center">
-          <RadioTogglers
-            options={[
-              {
-                value: "color",
-                icon: faPalette,
-                label: "Color",
-              },
-              { value: "image", icon: faImage, label: "Image" },
-            ]}
-          />
+        <div
+          className="p-16 flex justify-center items-center"
+          style={{
+            backgroundColor: bgColor,
+          }}
+        >
+          <div>
+            <RadioTogglers
+              options={[
+                {
+                  value: "color",
+                  icon: faPalette,
+                  label: "Color",
+                },
+                { value: "image", icon: faImage, label: "Image" },
+              ]}
+              defaultValue={bgType}
+              onChange={(newBgType) => {
+                setBgType(newBgType);
+              }}
+            />
+            {bgType === "color" && (
+              <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+                <div className="flex justify-center gap-2">
+                  <span>Background color :</span>
+                  <input
+                    type="color"
+                    name="bgColor"
+                    onChange={(e) => setBgColor(e.target.value)}
+                    defaultValue={bgColor}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="flex justify-center -mb-12">
           <Image

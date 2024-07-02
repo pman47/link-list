@@ -25,7 +25,12 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
   const page = await Page.findOne({ owner: session.user?.email });
 
   if (page) {
-    return <PageSettingsForm page={page} user={session.user} />;
+    return (
+      <PageSettingsForm
+        page={JSON.parse(JSON.stringify(page))}
+        user={session.user}
+      />
+    );
   }
 
   return (
