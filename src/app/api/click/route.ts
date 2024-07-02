@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 export async function POST(request: NextRequest) {
   const reqUrl = new URL(request.url);
   const queryParams = reqUrl.searchParams;
-  const url = queryParams.get("url");
+  const url = atob(queryParams.get("url") || "");
   const isAdmin = queryParams.get("isAdmin");
 
   if (isAdmin === "false") {
