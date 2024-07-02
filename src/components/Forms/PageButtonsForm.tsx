@@ -1,16 +1,6 @@
 "use client";
 
-import { FC, useMemo, useState } from "react";
-import SectionBox from "../layout/SectionBox";
-import { Session } from "next-auth";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEnvelope,
-  faMobile,
-  faPlus,
-  faSave,
-  IconDefinition,
-} from "@fortawesome/free-solid-svg-icons";
+import { savePageButtons } from "@/actions/pageActions";
 import {
   faDiscord,
   faFacebook,
@@ -20,9 +10,20 @@ import {
   faWhatsapp,
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import SubmitButton from "../buttons/SubmitButton";
-import { savePageButtons } from "@/actions/pageActions";
+import {
+  faEnvelope,
+  faMobile,
+  faPlus,
+  faSave,
+  faTrash,
+  IconDefinition,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Session } from "next-auth";
+import { FC, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import SubmitButton from "../buttons/SubmitButton";
+import SectionBox from "../layout/SectionBox";
 
 interface PageButtonsFormProps {
   page: PageType;
@@ -49,6 +50,12 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
     setActiveButton((prevButtons) => {
       return [...prevButtons, button];
     });
+  }
+
+  function removeButton({ key: buttonKeyToRemove }: Button) {
+    setActiveButton((prevButtons) =>
+      prevButtons.filter((button) => button.key !== buttonKeyToRemove)
+    );
   }
 
   const availableButtons = useMemo(() => {
@@ -81,6 +88,13 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
               name={b.key}
               defaultValue={page.buttons[b.key]}
             />
+            <button
+              onClick={() => removeButton(b)}
+              type="button"
+              className="p-2 bg-gray-300 py-2 px-4 cursor-pointer hover:bg-red-300 duration-200"
+            >
+              <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+            </button>
           </div>
         ))}
         {availableButtons.length > 0 && (
