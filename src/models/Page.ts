@@ -32,6 +32,10 @@ const PageSchema = new Schema(
       type: String,
       default: "black",
     },
+    buttons: {
+      type: Object,
+      default: {},
+    },
   },
   {
     timestamps: true,

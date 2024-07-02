@@ -135,7 +135,7 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
               name="bio"
               defaultValue={page.bio}
             />
-            <div className="max-w-[100px] mx-auto">
+            <div className="w-full max-w-xs mx-auto">
               <SubmitButton>
                 <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
                 <span>Save</span>
