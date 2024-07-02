@@ -7,6 +7,7 @@ import { FC } from "react";
 import SubmitButton from "../buttons/SubmitButton";
 import RadioTogglers from "../FormItems/RadioTogglers";
 import { savePageSettings } from "@/actions/pageActions";
+import toast from "react-hot-toast";
 
 interface PageSettingsFormProps {
   page: PageType;
@@ -15,10 +16,10 @@ interface PageSettingsFormProps {
 
 const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
   async function saveBaseSettings(formData: FormData) {
-    try {
-      const result = await savePageSettings(formData);
-      console.log({ result });
-    } catch (error) {}
+    const result = await savePageSettings(formData);
+    if (result) {
+      toast.success("Saved.");
+    }
   }
 
   return (
