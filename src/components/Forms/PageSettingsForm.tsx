@@ -25,6 +25,23 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
     }
   }
 
+  // function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+  //   const file = e.target?.files?.[0];
+  //   if (file) {
+  //     const data = new FormData();
+  //     data.set("file", file);
+
+  //     fetch("/api/upload", {
+  //       method: "POST",
+  //       body: data,
+  //     })
+  //       .then((response) => response.json())
+  //       .then((link) => {
+  //         console.log("link ==>>", link);
+  //       });
+  //   }
+  // }
+
   return (
     <div className="-m-4">
       <form action={saveBaseSettings}>
@@ -35,7 +52,7 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
           }}
         >
           <div>
-            <RadioTogglers
+            {/* <RadioTogglers
               options={[
                 {
                   value: "color",
@@ -48,7 +65,7 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
               onChange={(newBgType) => {
                 setBgType(newBgType);
               }}
-            />
+            /> */}
             {bgType === "color" && (
               <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
                 <div className="flex justify-center gap-2">
@@ -62,6 +79,19 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
                 </div>
               </div>
             )}
+            {/* {bgType === "image" && (
+              <div className="flex justify-center">
+                <label className="bg-white shadow px-4 py-2 mt-2">
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                  Change Image
+                </label>
+              </div>
+            )} */}
           </div>
         </div>
         <div className="flex justify-center -mb-12">
