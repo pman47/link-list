@@ -71,16 +71,20 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
           />
           <span>Add new</span>
         </button>
-        <ReactSortable list={links as any} setList={setLinks as any}>
+        <ReactSortable
+          handle={".handle"}
+          list={links as any}
+          setList={setLinks as any}
+        >
           {links.map((link) => (
             <div
               className="mt-4 flex gap-2 items-center border-[1px] p-4 rounded-md"
               key={link.key}
             >
-              <div className="">
+              <div className="handle">
                 <FontAwesomeIcon
                   icon={faGripLines}
-                  className="text-gray-700 mr-2 cursor-ns-resize"
+                  className="text-gray-500 mr-2 cursor-ns-resize"
                 />
               </div>
               <div className="grow">

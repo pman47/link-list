@@ -78,6 +78,7 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
       <form action={saveButtons}>
         <h2 className="text-2xl font-bold mb-4">Buttons</h2>
         <ReactSortable
+          handle={".handle"}
           list={activeButton as any}
           setList={setActiveButton as any}
         >
@@ -86,7 +87,7 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
               <div className="w-52 flex p-2 gap-2 items-center text-gray-700">
                 <FontAwesomeIcon
                   icon={faGripLines}
-                  className="h-4 w-4 cursor-pointer text-gray-400"
+                  className="handle h-4 w-4 cursor-pointer text-gray-400"
                 />
                 <FontAwesomeIcon icon={b.icon} className="h-4 w-4" />
                 <span>{b.label} :</span>
