@@ -2,7 +2,7 @@ import DBConnect from "@/lib/dbConnect";
 import { Page } from "@/models/Page";
 import { User } from "@/models/User";
 import { allButtons } from "@/utils/allButtons";
-import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import { faLink, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +14,16 @@ interface UserPageProps {
   };
 }
 
+function buttonLink(key: string, value: string) {
+  if (key === "mobile") {
+    return "tel:" + value;
+  }
+  if (key === "email") {
+    return "mailto:" + value;
+  }
+  return value;
+}
+
 const UserPage: FC<UserPageProps> = async ({ params }) => {
   const uri = params.uri;
 
@@ -22,7 +32,7 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
   const user = await User.findOne({ email: page.owner });
 
   return (
-    <div className="bg-blue-950 text-white">
+    <div className="bg-blue-950 text-white min-h-screen">
       <div
         className="h-36 bg-cover bg-center"
         style={{
@@ -49,7 +59,7 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
       <div className="flex gap-2 justify-center mt-4 pb-4">
         {Object.keys(page.buttons).map((buttonKey) => (
           <Link
-            href={page.buttons[buttonKey]}
+            href={buttonLink(buttonKey, page.buttons[buttonKey])}
             className="rounded-full bg-white text-blue-950 p-2 flex items-center justify-center"
             key={buttonKey}
           >
@@ -57,6 +67,24 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
               icon={allButtons.find((button) => button.key === buttonKey)?.icon}
               className="w-6 h-6"
             />
+          </Link>
+        ))}
+      </div>
+      <div className="max-w-2xl mx-auto grid lg:grid-cols-2 gap-6 p-4 px-8">
+        {page.links.map((link: Link) => (
+          <Link
+            target="_blank"
+            href={link.url}
+            className="bg-indigo-800 p-2 flex"
+            key={link.key}
+          >
+            <div className="bg-blue-700 p-1 relative -left-4 flex items-center justify-center w-16 h-16">
+              <FontAwesomeIcon icon={faLink} className="w-6 h-6" />
+            </div>
+            <div className="flex-1 flex-row items-center justify-center">
+              <h3>{link.title}</h3>
+              <h3 className="text-white/50">{link.subtitle}</h3>
+            </div>
           </Link>
         ))}
       </div>
