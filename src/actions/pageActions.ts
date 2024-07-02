@@ -59,3 +59,18 @@ export async function savePageButtons(formData: FormData) {
   await Page.updateOne({ owner: session?.user?.email! }, dataToUpdate);
   return true;
 }
+
+export async function savePageLinks(links: Link[]) {
+  await DBConnect();
+
+  const session = await getServerSession(authOptions);
+  if (!session) return false;
+
+  await Page.updateOne(
+    { owner: session?.user?.email! },
+    {
+      links,
+    }
+  );
+  return true;
+}

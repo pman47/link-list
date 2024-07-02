@@ -8,6 +8,7 @@ interface SubmitButtonProps extends React.ComponentProps<"button"> {}
 const SubmitButton: FC<SubmitButtonProps> = ({
   className,
   children,
+  type = "submit",
   ...rest
 }) => {
   const { pending } = useFormStatus();
@@ -17,7 +18,7 @@ const SubmitButton: FC<SubmitButtonProps> = ({
         "bg-blue-500 disabled:bg-blue-200 text-white disabled:text-gray-400 py-2 px-4 mx-auto w-full flex gap-2 items-center justify-center rounded-md",
         className
       )}
-      type="submit"
+      type={type}
       disabled={pending}
       {...rest}
     >

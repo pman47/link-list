@@ -126,13 +126,11 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
             ))}
           </div>
         )}
-        <div className="mt-4 border-t pt-4">
-          <div className="w-full max-w-xs mx-auto ">
-            <SubmitButton>
-              <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
-              <span>Save</span>
-            </SubmitButton>
-          </div>
+        <div className="mt-4 border-t pt-4 w-full">
+          <SubmitButton className="mx-auto max-w-xs">
+            <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
+            <span>Save</span>
+          </SubmitButton>
         </div>
       </form>
     </SectionBox>
