@@ -22,7 +22,7 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import SubmitButton from "../buttons/SubmitButton";
 import { savePageButtons } from "@/actions/pageActions";
-import toast from "react-hot-toast/headless";
+import toast from "react-hot-toast";
 
 interface PageButtonsFormProps {
   page: PageType;
