@@ -1,3 +1,4 @@
+import PageButtonsForm from "@/components/Forms/PageButtonsForm";
 import PageSettingsForm from "@/components/Forms/PageSettingsForm";
 import UsernameForm from "@/components/Forms/UsernameForm";
 import { authOptions } from "@/lib/auth";
@@ -26,10 +27,16 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
 
   if (page) {
     return (
-      <PageSettingsForm
-        page={JSON.parse(JSON.stringify(page))}
-        user={session.user}
-      />
+      <>
+        <PageSettingsForm
+          page={JSON.parse(JSON.stringify(page))}
+          user={session.user}
+        />
+        <PageButtonsForm
+          page={JSON.parse(JSON.stringify(page))}
+          user={session.user}
+        />
+      </>
     );
   }
 

@@ -8,6 +8,7 @@ import { FC, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitButton from "../buttons/SubmitButton";
 import RadioTogglers from "../FormItems/RadioTogglers";
+import SectionBox from "../layout/SectionBox";
 
 interface PageSettingsFormProps {
   page: PageType;
@@ -43,16 +44,17 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
   // }
 
   return (
-    <div className="-m-4">
-      <form action={saveBaseSettings}>
-        <div
-          className="py-4 min-h-[280px] flex justify-center items-center"
-          style={{
-            backgroundColor: bgColor,
-          }}
-        >
-          <div>
-            {/* <RadioTogglers
+    <div>
+      <SectionBox>
+        <form action={saveBaseSettings}>
+          <div
+            className="py-4 -m-4 min-h-[280px] flex justify-center items-center"
+            style={{
+              backgroundColor: bgColor,
+            }}
+          >
+            <div>
+              {/* <RadioTogglers
               options={[
                 {
                   value: "color",
@@ -66,20 +68,20 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
                 setBgType(newBgType);
               }}
             /> */}
-            {bgType === "color" && (
-              <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
-                <div className="flex justify-center gap-2">
-                  <span>Background color :</span>
-                  <input
-                    type="color"
-                    name="bgColor"
-                    onChange={(e) => setBgColor(e.target.value)}
-                    defaultValue={bgColor}
-                  />
+              {bgType === "color" && (
+                <div className="bg-gray-200 shadow text-gray-700 p-2 mt-2">
+                  <div className="flex justify-center gap-2">
+                    <span>Background color :</span>
+                    <input
+                      type="color"
+                      name="bgColor"
+                      onChange={(e) => setBgColor(e.target.value)}
+                      defaultValue={bgColor}
+                    />
+                  </div>
                 </div>
-              </div>
-            )}
-            {/* {bgType === "image" && (
+              )}
+              {/* {bgType === "image" && (
               <div className="flex justify-center">
                 <label className="bg-white shadow px-4 py-2 mt-2">
                   <input
@@ -92,55 +94,56 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
                 </label>
               </div>
             )} */}
+            </div>
           </div>
-        </div>
-        <div className="flex justify-center -mb-12">
-          <Image
-            className="rounded-full relative -top-8 border-white border-4 shadow shadow-black/50"
-            src={user?.image!}
-            alt="avatar"
-            width={128}
-            height={128}
-          />
-        </div>
-        <div className="p-4">
-          <label htmlFor="nameIn" className="inputLabel">
-            Display name
-          </label>
-          <input
-            type="text"
-            id="nameIn"
-            placeholder="Pablo Escobar"
-            name="displayName"
-            defaultValue={page.displayName}
-          />
-          <label htmlFor="locationIn" className="inputLabel">
-            Location
-          </label>
-          <input
-            type="text"
-            id="locationIn"
-            placeholder="Somewhere in my own peaceful world."
-            name="location"
-            defaultValue={page.location}
-          />
-          <label htmlFor="bioIn" className="inputLabel">
-            Bio
-          </label>
-          <textarea
-            id="bioIn"
-            placeholder="Your bio goes here..."
-            name="bio"
-            defaultValue={page.bio}
-          />
-          <div className="max-w-[100px] mx-auto">
-            <SubmitButton>
-              <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
-              <span>Save</span>
-            </SubmitButton>
+          <div className="flex justify-center -mb-12">
+            <Image
+              className="rounded-full relative -top-8 border-white border-4 shadow shadow-black/50"
+              src={user?.image!}
+              alt="avatar"
+              width={128}
+              height={128}
+            />
           </div>
-        </div>
-      </form>
+          <div className="p-0">
+            <label htmlFor="nameIn" className="inputLabel">
+              Display name
+            </label>
+            <input
+              type="text"
+              id="nameIn"
+              placeholder="Pablo Escobar"
+              name="displayName"
+              defaultValue={page.displayName}
+            />
+            <label htmlFor="locationIn" className="inputLabel">
+              Location
+            </label>
+            <input
+              type="text"
+              id="locationIn"
+              placeholder="Somewhere in my own peaceful world."
+              name="location"
+              defaultValue={page.location}
+            />
+            <label htmlFor="bioIn" className="inputLabel">
+              Bio
+            </label>
+            <textarea
+              id="bioIn"
+              placeholder="Your bio goes here..."
+              name="bio"
+              defaultValue={page.bio}
+            />
+            <div className="max-w-[100px] mx-auto">
+              <SubmitButton>
+                <FontAwesomeIcon icon={faSave} className="w-4 h-4" />
+                <span>Save</span>
+              </SubmitButton>
+            </div>
+          </div>
+        </form>
+      </SectionBox>
     </div>
   );
 };

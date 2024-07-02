@@ -38,9 +38,7 @@ export default async function AppLayout({
               <AppSideBar />
             </div>
           </aside>
-          <div className="grow">
-            <div className="bg-white m-8 p-4 shadow">{children}</div>
-          </div>
+          <div className="grow">{children}</div>
         </main>
       </body>
     </html>
