@@ -10,4 +10,11 @@ declare global {
     subtitle: string;
     url: string;
   }
+
+  interface Button {
+    key: string;
+    label: string;
+    icon: IconDefinition;
+    placeholder: string;
+  }
 }
