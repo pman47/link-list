@@ -1,12 +1,17 @@
 import AppSideBar from "@/components/layout/AppSideBar";
+import { authOptions } from "@/lib/auth";
+import DBConnect from "@/lib/dbConnect";
+import { Page } from "@/models/Page";
+import { faLink } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { Lato } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
-import "../globals.css";
-import { authOptions } from "@/lib/auth";
 import { Toaster } from "react-hot-toast";
+import "../globals.css";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -25,17 +30,37 @@ export default async function AppLayout({
     return redirect("/");
   }
 
+  await DBConnect();
+  const page = await Page.findOne({ owner: session.user?.email! });
+
   return (
     <html lang="en">
       <body className={lato.className}>
         <Toaster />
         <main className="flex min-h-screen">
-          <aside className="bg-white w-48 p-4 pt-8 shadow">
-            <div className="rounded-full overflow-hidden w-24 aspect-square mx-auto relative">
-              <Image src={session?.user?.image!} alt="avatar" fill />
-            </div>
-            <div className="text-center">
-              <AppSideBar />
+          <aside className="bg-white w-48 p-4 pt-6 shadow">
+            <div className="sticky top-0 pt-2">
+              <div className="rounded-full overflow-hidden w-24 aspect-square mx-auto relative">
+                <Image src={session?.user?.image!} alt="avatar" fill />
+              </div>
+              {page && (
+                <Link
+                  target="_blank"
+                  href={"/" + page.uri}
+                  className="text-center mt-4 flex gap-1 items-center justify-center"
+                >
+                  <FontAwesomeIcon
+                    size="lg"
+                    icon={faLink}
+                    className="text-blue-500"
+                  />
+                  <span className="text-2xl text-gray-300">/</span>
+                  <span>{page.uri}</span>
+                </Link>
+              )}
+              <div className="text-center">
+                <AppSideBar />
+              </div>
             </div>
           </aside>
           <div className="grow">{children}</div>
