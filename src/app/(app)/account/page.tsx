@@ -26,21 +26,14 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
   await DBConnect();
   const page = await Page.findOne({ owner: session.user?.email });
 
+  const leanPage = JSON.parse(JSON.stringify(page));
+
   if (page) {
     return (
       <>
-        <PageSettingsForm
-          page={JSON.parse(JSON.stringify(page))}
-          user={session.user}
-        />
-        <PageButtonsForm
-          page={JSON.parse(JSON.stringify(page))}
-          user={session.user}
-        />
-        <PageLinksForm
-          page={JSON.parse(JSON.stringify(page))}
-          user={session.user}
-        />
+        <PageSettingsForm page={leanPage} user={session.user} />
+        <PageButtonsForm page={leanPage} user={session.user} />
+        <PageLinksForm page={leanPage} user={session.user} />
       </>
     );
   }
