@@ -22,7 +22,8 @@ interface PageButtonsFormProps {
 }
 
 const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
-  const pageSavedButtonKeys = Object.keys(page?.buttons || {});
+  page.buttons = page?.buttons || {};
+  const pageSavedButtonKeys = Object.keys(page.buttons);
   const pageSavedButtonInfo = pageSavedButtonKeys
     .map((buttonKey) => allButtons.find((button) => button.key === buttonKey))
     .filter((button): button is Button => button !== undefined);
