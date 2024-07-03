@@ -16,7 +16,7 @@ interface PageSettingsFormProps {
 }
 
 const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
-  const [bgType, setBgType] = useState<"color" | "image">(page.bgType);
+  const [bgType, setBgType] = useState<string>(page.bgType);
   const [bgColor, setBgColor] = useState<string>(page.bgColor);
 
   async function saveBaseSettings(formData: FormData) {
