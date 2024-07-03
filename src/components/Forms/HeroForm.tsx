@@ -7,10 +7,9 @@ import { FC, SyntheticEvent } from "react";
 
 interface HeroFormProps {
   user: DefaultSession["user"];
-  hostname: string | null;
 }
 
-const HeroForm: FC<HeroFormProps> = ({ user, hostname }) => {
+const HeroForm: FC<HeroFormProps> = ({ user }) => {
   const router = useRouter();
 
   const handleSubmit = async (
@@ -37,7 +36,7 @@ const HeroForm: FC<HeroFormProps> = ({ user, hostname }) => {
       className="inline-flex items-center shadow-lg shadow-gray-700/20 bg-white"
       onSubmit={handleSubmit}
     >
-      <span className="bg-white p-4 pr-0">{hostname}/</span>
+      <span className="bg-white p-4 pr-0">linklist.to/</span>
       <input
         type="text"
         name=""

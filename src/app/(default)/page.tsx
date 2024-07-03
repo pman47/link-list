@@ -1,11 +1,8 @@
 import HeroForm from "@/components/Forms/HeroForm";
 import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth";
-import { headers } from "next/headers";
 
 export default async function Home() {
-  const headersList = headers();
-  const hostname = headersList.get("x-forwarded-host");
   const session = await getServerSession(authOptions);
 
   return (
@@ -17,7 +14,7 @@ export default async function Home() {
             All Your Links in One Place – Effortless Sharing Made Simple
           </h2>
         </div>
-        <HeroForm user={session?.user} hostname={hostname} />
+        <HeroForm user={session?.user} />
       </section>
     </main>
   );
