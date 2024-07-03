@@ -69,7 +69,6 @@ const page: FC<pageProps> = async ({}) => {
     const nextDate = groupedViews?.[index + 1]?._id;
     if (date && nextDate) {
       const daysBetween = differenceInDays(parseISO(nextDate), parseISO(date));
-      console.log(date, nextDate, daysBetween);
       if (daysBetween > 0) {
         for (let i = 1; i < daysBetween; i++) {
           const dateBetween = addDays(parseISO(date), i);
