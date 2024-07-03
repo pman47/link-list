@@ -1,6 +1,6 @@
 import { InferSchemaType, model, models, Schema } from "mongoose";
 
-const PageSchema = new Schema(
+export const PageSchema = new Schema(
   {
     uri: {
       type: String,

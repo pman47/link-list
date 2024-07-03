@@ -52,7 +52,7 @@ export default async function AppLayout({
                   <FontAwesomeIcon
                     size="lg"
                     icon={faLink}
-                    className="text-blue-500"
+                    className="text-blue-500 w-6 h-6"
                   />
                   <span className="text-2xl text-gray-300">/</span>
                   <span>{page.uri}</span>

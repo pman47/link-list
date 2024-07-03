@@ -1,6 +1,6 @@
 import { InferSchemaType } from "mongoose";
-import { PageSchema } from "./path/to/your/schema/file";
 import { EventSchema } from "@/models/Event";
+import { PageSchema } from "@/models/Page";
 
 declare global {
   type PageType = InferSchemaType<typeof PageSchema>;

@@ -90,7 +90,14 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
             href={link.url}
             className="bg-indigo-800 p-2 flex"
             key={link.key}
-            ping={"/api/click?url=" + btoa(link.url) + "&isAdmin=" + isAdmin}
+            ping={
+              "/api/click?url=" +
+              btoa(link.url) +
+              "&isAdmin=" +
+              isAdmin +
+              "&page=" +
+              page.uri
+            }
           >
             <div className="bg-blue-700 p-1 relative -left-4 flex items-center justify-center w-16 h-16">
               <FontAwesomeIcon icon={faLink} className="w-6 h-6" />
