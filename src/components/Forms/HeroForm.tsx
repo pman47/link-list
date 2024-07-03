@@ -2,14 +2,15 @@
 
 import { DefaultSession } from "next-auth";
 import { signIn } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FC, SyntheticEvent } from "react";
 
 interface HeroFormProps {
   user: DefaultSession["user"];
+  hostname: string | null;
 }
 
-const HeroForm: FC<HeroFormProps> = ({ user }) => {
+const HeroForm: FC<HeroFormProps> = ({ user, hostname }) => {
   const router = useRouter();
 
   const handleSubmit = async (
@@ -33,18 +34,26 @@ const HeroForm: FC<HeroFormProps> = ({ user }) => {
   return (
     <form
       action=""
-      className="inline-flex items-center shadow-lg shadow-gray-700/20"
+      className="inline-flex items-center shadow-lg shadow-gray-700/20 bg-white"
       onSubmit={handleSubmit}
     >
-      <span className="bg-white p-4 pr-0">linklist.to/</span>
+      <span className="bg-white p-4 pr-0">{hostname}/</span>
       <input
         type="text"
         name=""
         id=""
         placeholder="username"
-        className="py-4"
+        style={{
+          backgroundColor: "white",
+          marginBottom: 0,
+          paddingLeft: 0,
+        }}
+        className="outline-none"
       />
-      <button type="submit" className="bg-blue-500 text-white p-4 px-6">
+      <button
+        type="submit"
+        className="bg-blue-500 text-white p-4 px-6 whitespace-nowrap"
+      >
         Join for free
       </button>
     </form>

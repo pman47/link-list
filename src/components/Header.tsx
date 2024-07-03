@@ -20,17 +20,17 @@ const Header: FC<HeaderProps> = async ({}) => {
             <span className="font-bold">LinkList</span>
           </Link>
           <nav className="flex  items-center gap-4 text-slate-500 text-sm">
-            <Link href={"/about"}>About</Link>
+            {/* <Link href={"/about"}>About</Link>
             <Link href={"/pricing"}>Pricing</Link>
-            <Link href={"/contact"}>Contact</Link>
+            <Link href={"/contact"}>Contact</Link> */}
           </nav>
         </div>
 
-        <nav className="flex gap-2 text-sm text-slate-500 items-center">
+        <nav className="flex gap-4 text-sm text-slate-500 items-center">
           {!!session && (
             <>
               <Link href={"/account"}>Hello, {session?.user?.name}</Link>
-              <LogoutButton />
+              <LogoutButton className="flex gap-2 items-center border p-2 px-4 rounded-full" />
             </>
           )}
           {!session && (

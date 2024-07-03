@@ -65,7 +65,7 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
           setList={setActiveButton as any}
         >
           {activeButton.map((b) => (
-            <div className="mb-4 flex items-center" key={b.key}>
+            <div className="mb-4 md:flex items-center" key={b.key}>
               <div className="w-52 flex p-2 gap-2 items-center text-gray-700">
                 <FontAwesomeIcon
                   icon={faGripLines}
@@ -74,20 +74,22 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
                 <FontAwesomeIcon icon={b.icon} className="h-4 w-4" />
                 <span>{b.label} :</span>
               </div>
-              <input
-                type={"text"}
-                style={{ marginBottom: 0 }}
-                placeholder={b.placeholder}
-                name={b.key}
-                defaultValue={page.buttons[b.key]}
-              />
-              <button
-                onClick={() => removeButton(b)}
-                type="button"
-                className="p-2 bg-gray-300 py-2 px-4 cursor-pointer hover:bg-red-300 duration-200"
-              >
-                <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
-              </button>
+              <div className="grow flex">
+                <input
+                  type={"text"}
+                  style={{ marginBottom: 0 }}
+                  placeholder={b.placeholder}
+                  name={b.key}
+                  defaultValue={page.buttons[b.key]}
+                />
+                <button
+                  onClick={() => removeButton(b)}
+                  type="button"
+                  className="p-2 bg-gray-300 py-2 px-4 cursor-pointer hover:bg-red-300 duration-200"
+                >
+                  <FontAwesomeIcon icon={faTrash} className="w-4 h-4" />
+                </button>
+              </div>
             </div>
           ))}
         </ReactSortable>

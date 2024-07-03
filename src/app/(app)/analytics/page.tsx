@@ -104,26 +104,28 @@ const page: FC<pageProps> = async ({}) => {
 
           return (
             <div
-              className="flex gap-4 items-center border-t border-gray-200 py-4"
+              className="md:flex gap-4 items-center border-t border-gray-200 py-4"
               key={link.key}
             >
-              <div className="text-blue-500 pl-4">
-                <FontAwesomeIcon icon={faLink} className="h-6 w-6" />
+              <div className="flex gap-4 items-center grow">
+                <div className="text-blue-500 pl-4">
+                  <FontAwesomeIcon icon={faLink} className="h-6 w-6" />
+                </div>
+                <div className="grow">
+                  <h3>{link.title || "no title"}</h3>
+                  <p className="text-gray-500 text-sm">
+                    {link.subtitle || "no description"}
+                  </p>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    className="text-blue-400 text-xs"
+                  >
+                    {link.url}
+                  </a>
+                </div>
               </div>
-              <div className="grow">
-                <h3>{link.title || "no title"}</h3>
-                <p className="text-gray-500 text-sm">
-                  {link.subtitle || "no description"}
-                </p>
-                <a
-                  href={link.url}
-                  target="_blank"
-                  className="text-blue-400 text-xs"
-                >
-                  {link.url}
-                </a>
-              </div>
-              <div className="text-center">
+              <div className="text-center shrink-0 mt-1 md:mt-0">
                 <div className="border p-2 rounded-md">
                   <div className="text-3xl">{todaysViews}</div>
                   <div className="text-gray-400 text-xs uppercase font-bold ">
@@ -131,7 +133,7 @@ const page: FC<pageProps> = async ({}) => {
                   </div>
                 </div>
               </div>
-              <div className="text-center">
+              <div className="text-center shrink-0 mt-1 md:mt-0">
                 <div className="border p-2 rounded-md">
                   <div className="text-3xl">{totalViews}</div>
                   <div className="text-gray-400 text-xs uppercase font-bold ">

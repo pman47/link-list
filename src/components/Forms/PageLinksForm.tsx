@@ -81,7 +81,7 @@ const PageLinksForm: FC<PageLinksFormProps> = ({ page }) => {
         >
           {links.map((link) => (
             <div
-              className="mt-4 flex gap-6 items-center border-[1px] p-4 rounded-md"
+              className="mt-4 md:flex gap-6 items-center border-[1px] p-4 rounded-md"
               key={link.key}
             >
               <div className="handle">
