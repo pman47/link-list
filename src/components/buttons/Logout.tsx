@@ -2,7 +2,8 @@
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signOut } from "next-auth/react";
-import { FC } from "react";
+import { FC, useState } from "react";
+import Loader from "../Loader";
 
 interface LogoutButtonProps {
   className?: string;
@@ -15,14 +16,39 @@ const LogoutButton: FC<LogoutButtonProps> = ({
   iconLeft = false,
   iconClasses = "",
 }) => {
+  const [processing, setProcessing] = useState<boolean>(false);
+
+  const handleLogOut = () => {
+    setProcessing(true);
+    signOut().finally(() => {
+      setProcessing(false);
+    });
+  };
+
   return (
-    <button onClick={() => signOut()} className={className}>
-      {iconLeft && (
-        <FontAwesomeIcon icon={faRightFromBracket} className={iconClasses} />
-      )}
-      <span>Logout</span>
-      {!iconLeft && (
-        <FontAwesomeIcon icon={faRightFromBracket} className={iconClasses} />
+    <button onClick={handleLogOut} className={className} disabled={processing}>
+      {processing ? (
+        <Loader
+          showText={false}
+          divCSS={"w-full items-center justify-center"}
+          svgCSS={"h-6 w-6"}
+        />
+      ) : (
+        <>
+          {iconLeft && (
+            <FontAwesomeIcon
+              icon={faRightFromBracket}
+              className={iconClasses}
+            />
+          )}
+          <span>Logout</span>
+          {!iconLeft && (
+            <FontAwesomeIcon
+              icon={faRightFromBracket}
+              className={iconClasses}
+            />
+          )}
+        </>
       )}
     </button>
   );

@@ -3,7 +3,7 @@
 import { DefaultSession } from "next-auth";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { FC, SyntheticEvent } from "react";
+import { FC, SyntheticEvent, useState } from "react";
 
 interface HeroFormProps {
   user: DefaultSession["user"];
@@ -11,6 +11,7 @@ interface HeroFormProps {
 
 const HeroForm: FC<HeroFormProps> = ({ user }) => {
   const router = useRouter();
+  const [processing, setProcessing] = useState<boolean>(false);
 
   const handleSubmit = async (
     e: SyntheticEvent<HTMLFormElement, SubmitEvent>
@@ -23,9 +24,12 @@ const HeroForm: FC<HeroFormProps> = ({ user }) => {
       if (user) {
         router.push("/account?desiredUsername=" + username);
       } else {
+        setProcessing(true);
         await signIn("google", {
           redirect: true,
           callbackUrl: "/account?desiredUsername=" + username,
+        }).finally(() => {
+          setProcessing(false);
         });
       }
     }
@@ -52,7 +56,8 @@ const HeroForm: FC<HeroFormProps> = ({ user }) => {
       />
       <button
         type="submit"
-        className="bg-blue-500 text-white p-4 px-6 whitespace-nowrap"
+        className="bg-blue-500 text-white p-4 px-6 whitespace-nowrap disabled:bg-blue-300"
+        disabled={processing}
       >
         Join for free
       </button>

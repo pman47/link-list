@@ -1,16 +1,29 @@
+import { cn } from "@/utils/cn";
 import { FC } from "react";
 
-interface LoaderProps {}
+interface LoaderProps {
+  divCSS?: string;
+  svgCSS?: string;
+  textCSS?: string;
+  showText?: boolean;
+  text?: string;
+}
 
-const Loader: FC<LoaderProps> = ({}) => {
+const Loader: FC<LoaderProps> = ({
+  divCSS,
+  svgCSS,
+  textCSS,
+  showText = true,
+  text = "Loading...",
+}) => {
   return (
     <div
-      aria-label="Loading..."
+      aria-label={text}
       role="status"
-      className="flex items-center space-x-2"
+      className={cn("flex items-center space-x-2", divCSS)}
     >
       <svg
-        className="h-16 w-16 animate-spin stroke-gray-500"
+        className={cn("h-16 w-16 animate-spin stroke-gray-500", svgCSS)}
         viewBox="0 0 256 256"
       >
         <line
@@ -86,7 +99,11 @@ const Loader: FC<LoaderProps> = ({}) => {
           strokeWidth="24"
         ></line>
       </svg>
-      <span className="text-4xl font-medium text-gray-500">Loading...</span>
+      {showText && (
+        <span className={cn("text-4xl font-medium text-gray-500", textCSS)}>
+          {text}
+        </span>
+      )}
     </div>
   );
 };
