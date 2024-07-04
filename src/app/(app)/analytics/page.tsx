@@ -87,63 +87,78 @@ const page: FC<pageProps> = async ({}) => {
     <div>
       <SectionBox>
         <h2 className="text-xl mb-6 text-center">Views</h2>
-        <Chart
-          data={allDatesGroupedViews}
-          xAxisKey="_id"
-          xAxisLinesKeys={["count"]}
-        />
+        {allDatesGroupedViews.length > 0 ? (
+          <Chart
+            data={allDatesGroupedViews}
+            xAxisKey="_id"
+            xAxisLinesKeys={["count"]}
+          />
+        ) : (
+          <div>
+            <h4 className="text-center text-md  text-gray-400">
+              No analytics available.
+            </h4>
+          </div>
+        )}
       </SectionBox>
       <SectionBox>
-        {/* {JSON.stringify(clicks)} */}
         <h2 className="text-xl mb-6 text-center">Clicks</h2>
-        {page.links.map((link: Link) => {
-          const todaysViews = clicks.filter(
-            (c) => c.uri === link.url && isToday(c.createdAt)
-          ).length;
-          const totalViews = clicks.filter((c) => c.uri === link.url).length;
+        {page.links.length > 0 ? (
+          page.links.map((link: Link) => {
+            const todaysViews = clicks.filter(
+              (c) => c.uri === link.url && isToday(c.createdAt)
+            ).length;
+            const totalViews = clicks.filter((c) => c.uri === link.url).length;
 
-          return (
-            <div
-              className="md:flex gap-4 items-center border-t border-gray-200 py-4"
-              key={link.key}
-            >
-              <div className="flex gap-4 items-center grow">
-                <div className="text-blue-500 pl-4">
-                  <FontAwesomeIcon icon={faLink} className="h-6 w-6" />
+            return (
+              <div
+                className="md:flex gap-4 items-center border-t border-gray-200 py-4"
+                key={link.key}
+              >
+                <div className="flex gap-4 items-center grow">
+                  <div className="text-blue-500 pl-4">
+                    <FontAwesomeIcon icon={faLink} className="h-6 w-6" />
+                  </div>
+                  <div className="grow">
+                    <h3>{link.title || "no title"}</h3>
+                    <p className="text-gray-500 text-sm">
+                      {link.subtitle || "no description"}
+                    </p>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      className="text-blue-400 text-xs"
+                    >
+                      {link.url}
+                    </a>
+                  </div>
                 </div>
-                <div className="grow">
-                  <h3>{link.title || "no title"}</h3>
-                  <p className="text-gray-500 text-sm">
-                    {link.subtitle || "no description"}
-                  </p>
-                  <a
-                    href={link.url}
-                    target="_blank"
-                    className="text-blue-400 text-xs"
-                  >
-                    {link.url}
-                  </a>
+                <div className="text-center shrink-0 mt-1 md:mt-0">
+                  <div className="border p-2 rounded-md">
+                    <div className="text-3xl">{todaysViews}</div>
+                    <div className="text-gray-400 text-xs uppercase font-bold ">
+                      clicks today
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="text-center shrink-0 mt-1 md:mt-0">
-                <div className="border p-2 rounded-md">
-                  <div className="text-3xl">{todaysViews}</div>
-                  <div className="text-gray-400 text-xs uppercase font-bold ">
-                    clicks today
+                <div className="text-center shrink-0 mt-1 md:mt-0">
+                  <div className="border p-2 rounded-md">
+                    <div className="text-3xl">{totalViews}</div>
+                    <div className="text-gray-400 text-xs uppercase font-bold ">
+                      clicks total
+                    </div>
                   </div>
                 </div>
               </div>
-              <div className="text-center shrink-0 mt-1 md:mt-0">
-                <div className="border p-2 rounded-md">
-                  <div className="text-3xl">{totalViews}</div>
-                  <div className="text-gray-400 text-xs uppercase font-bold ">
-                    clicks total
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div>
+            <h4 className="text-center text-md  text-gray-400">
+              No analytics available.
+            </h4>
+          </div>
+        )}
       </SectionBox>
     </div>
   );
