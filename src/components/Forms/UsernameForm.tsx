@@ -1,6 +1,6 @@
 "use client";
 import grabUsername from "@/actions/grabUsername";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import SubmitButton from "../buttons/SubmitButton";
 import RightIcon from "../icons/RightIcon";
@@ -10,14 +10,14 @@ interface UsernameFormProps {
 }
 
 const UsernameForm: FC<UsernameFormProps> = ({ desiredUsername }) => {
+  const router = useRouter();
   const [taken, setTaken] = useState(false);
 
   async function handleSubmit(formData: FormData) {
-    const username = formData.get("username");
     const result = await grabUsername(formData);
     setTaken(result === false);
     if (result) {
-      redirect("/account?created=" + username);
+      router.refresh();
     }
   }
 

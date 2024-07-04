@@ -22,6 +22,7 @@ export default async function grabUsername(formData: FormData) {
   const pageDoc = await Page.create({
     uri: username,
     owner: session?.user?.email,
+    displayName: session?.user?.name,
   });
   return JSON.parse(JSON.stringify(pageDoc));
 }
