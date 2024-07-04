@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import SubmitButton from "../buttons/SubmitButton";
 import RightIcon from "../icons/RightIcon";
+import toast from "react-hot-toast";
 
 interface UsernameFormProps {
   desiredUsername: string;
@@ -14,6 +15,15 @@ const UsernameForm: FC<UsernameFormProps> = ({ desiredUsername }) => {
   const [taken, setTaken] = useState(false);
 
   async function handleSubmit(formData: FormData) {
+    const username: string | null = formData.get("username") as string | null;
+    if (!username) {
+      toast.error("Please enter valid username.");
+      return;
+    }
+    if (username?.includes(" ")) {
+      toast.error("space is not allowed in username.");
+      return;
+    }
     const result = await grabUsername(formData);
     setTaken(result === false);
     if (result) {
