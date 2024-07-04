@@ -30,9 +30,8 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
     const page = await Page.findOne({ owner: session.user.email });
     console.log("ACCOUNT :: page ==>>", page);
 
-    const leanPage = JSON.parse(JSON.stringify(page));
-
     if (page) {
+      const leanPage = JSON.parse(JSON.stringify(page));
       return (
         <>
           <PageSettingsForm page={leanPage} user={session.user} />
