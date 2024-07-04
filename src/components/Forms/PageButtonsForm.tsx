@@ -1,6 +1,7 @@
 "use client";
 
 import { savePageButtons } from "@/actions/pageActions";
+import { allButtons } from "@/utils/allButtons";
 import {
   faGripLines,
   faPlus,
@@ -14,7 +15,6 @@ import toast from "react-hot-toast";
 import { ReactSortable } from "react-sortablejs";
 import SubmitButton from "../buttons/SubmitButton";
 import SectionBox from "../layout/SectionBox";
-import { allButtons } from "@/utils/allButtons";
 
 interface PageButtonsFormProps {
   page: PageType;

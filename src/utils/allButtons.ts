@@ -1,16 +1,13 @@
 import {
-    faDiscord,
-    faFacebook,
-    faGithub,
-    faInstagram,
-    faTelegram,
-    faWhatsapp,
-    faYoutube,
+  faDiscord,
+  faFacebook,
+  faGithub,
+  faInstagram,
+  faTelegram,
+  faWhatsapp,
+  faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
-import {
-    faEnvelope,
-    faMobile
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faMobile } from "@fortawesome/free-solid-svg-icons";
 
 export const allButtons: Button[] = [
   {

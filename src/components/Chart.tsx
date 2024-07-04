@@ -1,7 +1,7 @@
 "use client";
+import { FC } from "react";
 import {
   CartesianGrid,
-  Legend,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -9,7 +9,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import { FC } from "react";
 
 interface ChartProps {
   data: { [key: string]: any }[];

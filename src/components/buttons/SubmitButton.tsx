@@ -1,7 +1,7 @@
+import { cn } from "@/utils/cn";
 import { FC } from "react";
 import { useFormStatus } from "react-dom";
 import Button from "./Button";
-import { cn } from "@/utils/cn";
 
 interface SubmitButtonProps extends React.ComponentProps<"button"> {}
 

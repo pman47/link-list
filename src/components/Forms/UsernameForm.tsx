@@ -1,9 +1,9 @@
 "use client";
 import grabUsername from "@/actions/grabUsername";
-import { FC, useState } from "react";
-import RightIcon from "../icons/RightIcon";
 import { redirect } from "next/navigation";
+import { FC, useState } from "react";
 import SubmitButton from "../buttons/SubmitButton";
+import RightIcon from "../icons/RightIcon";
 
 interface UsernameFormProps {
   desiredUsername: string;

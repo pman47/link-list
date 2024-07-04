@@ -1,13 +1,12 @@
 "use client";
 import { savePageSettings } from "@/actions/pageActions";
-import { faImage, faPalette, faSave } from "@fortawesome/free-solid-svg-icons";
+import { faSave } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import Image from "next/image";
 import { FC, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitButton from "../buttons/SubmitButton";
-import RadioTogglers from "../FormItems/RadioTogglers";
 import SectionBox from "../layout/SectionBox";
 
 interface PageSettingsFormProps {

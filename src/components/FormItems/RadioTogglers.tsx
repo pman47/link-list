@@ -1,5 +1,4 @@
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { faImage, faPalette } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
 
