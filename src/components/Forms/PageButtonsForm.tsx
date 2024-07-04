@@ -47,7 +47,7 @@ const PageButtonsForm: FC<PageButtonsFormProps> = ({ page }) => {
     return allButtons.filter(
       (b1) => !activeButton.find((b2) => b1.key === b2.key)
     );
-  }, [allButtons, activeButton]);
+  }, [activeButton]);
 
   async function saveButtons(formData: FormData) {
     const result = await savePageButtons(formData);
