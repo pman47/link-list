@@ -10,6 +10,7 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
+import profilePic from "/default-profile-pic.jpg";
 
 interface UserPageProps {
   params: {
@@ -56,13 +57,13 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
         }}
       ></div>
       <div className="aspect-square h-36 w-36 mx-auto relative -top-16 -mb-12">
-        {/* <Image
+        <Image
           className="rounded-full w-full h-full object-cover"
-          src={user?.image!}
+          src={user?.image || profilePic}
           alt="avatar"
           width={128}
           height={128}
-        /> */}
+        />
       </div>
       <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
       <h3 className="text-md gap-2 flex items-center justify-center text-white/70">
