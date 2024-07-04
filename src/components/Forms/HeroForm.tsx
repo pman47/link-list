@@ -24,6 +24,7 @@ const HeroForm: FC<HeroFormProps> = ({ user }) => {
         router.push("/account?desiredUsername=" + username);
       } else {
         await signIn("google", {
+          redirect: true,
           callbackUrl: "/account?desiredUsername=" + username,
         });
       }
