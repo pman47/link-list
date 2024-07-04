@@ -12,7 +12,6 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import "../globals.css";
-import profilePic from "/default-profile-pic.jpg";
 
 const lato = Lato({ subsets: ["latin"], weight: ["400", "700"] });
 
@@ -55,7 +54,7 @@ export default async function AppLayout({
             <div className="sticky top-0 pt-2">
               <div className="rounded-full overflow-hidden w-24 aspect-square mx-auto relative">
                 <Image
-                  src={session?.user?.image || profilePic}
+                  src={session?.user?.image || "/default-profile-pic.jpg"}
                   alt="avatar"
                   fill
                 />

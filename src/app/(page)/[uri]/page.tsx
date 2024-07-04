@@ -10,7 +10,6 @@ import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
-import profilePic from "/default-profile-pic.jpg";
 
 interface UserPageProps {
   params: {
@@ -59,7 +58,7 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
       <div className="aspect-square h-36 w-36 mx-auto relative -top-16 -mb-12">
         <Image
           className="rounded-full w-full h-full object-cover"
-          src={user?.image || profilePic}
+          src={user?.image || "/default-profile-pic.jpg"}
           alt="avatar"
           width={128}
           height={128}

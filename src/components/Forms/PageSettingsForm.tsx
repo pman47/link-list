@@ -8,7 +8,6 @@ import { FC, useState } from "react";
 import toast from "react-hot-toast";
 import SubmitButton from "../buttons/SubmitButton";
 import SectionBox from "../layout/SectionBox";
-import profilePic from "/default-profile-pic.jpg";
 
 interface PageSettingsFormProps {
   page: PageType;
@@ -99,7 +98,7 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
           <div className="flex justify-center -mb-12">
             <Image
               className="rounded-full relative -top-8 border-white border-4 shadow shadow-black/50"
-              src={user?.image || profilePic}
+              src={user?.image || "/default-profile-pic.jpg"}
               alt="avatar"
               width={128}
               height={128}
