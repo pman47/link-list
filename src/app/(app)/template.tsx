@@ -40,7 +40,7 @@ export default async function AppLayout({
         <main className="md:flex min-h-screen">
           <label
             htmlFor="navCb"
-            className="md:hidden ml-8 mt-4 p-4 rounded-md bg-white shadow inline-flex items-center gap-4 cursor-pointer"
+            className="md:hidden ml-8 mt-6 p-4 bg-white shadow inline-flex items-center gap-4 cursor-pointer active:bg-gray-300"
           >
             <FontAwesomeIcon icon={faBars} className="w-6 h-6" />
             <span>Open Navigation</span>
