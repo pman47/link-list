@@ -39,7 +39,7 @@ const Account: FC<AccountProps> = async ({ searchParams }) => {
   }
 
   return (
-    <div>
+    <div className="flex items-center justify-center h-96">
       <UsernameForm desiredUsername={desiredUsername} />
     </div>
   );

@@ -24,6 +24,9 @@ function buttonLink(key: string, value: string) {
   if (key === "email") {
     return "mailto:" + value;
   }
+  if (key === "whatsapp") {
+    return `https://wa.me/${value}`;
+  }
   return value;
 }
 
