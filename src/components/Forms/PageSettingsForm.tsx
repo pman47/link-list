@@ -96,13 +96,13 @@ const PageSettingsForm: FC<PageSettingsFormProps> = ({ page, user }) => {
             </div>
           </div>
           <div className="flex justify-center -mb-12">
-            <Image
+            {/* <Image
               className="rounded-full relative -top-8 border-white border-4 shadow shadow-black/50"
               src={user?.image!}
               alt="avatar"
               width={128}
               height={128}
-            />
+            /> */}
           </div>
           <div className="p-0">
             <label htmlFor="nameIn" className="inputLabel">

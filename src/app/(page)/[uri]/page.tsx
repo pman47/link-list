@@ -56,13 +56,13 @@ const UserPage: FC<UserPageProps> = async ({ params }) => {
         }}
       ></div>
       <div className="aspect-square h-36 w-36 mx-auto relative -top-16 -mb-12">
-        <Image
+        {/* <Image
           className="rounded-full w-full h-full object-cover"
           src={user?.image!}
           alt="avatar"
           width={128}
           height={128}
-        />
+        /> */}
       </div>
       <h2 className="text-2xl text-center mb-1">{page.displayName}</h2>
       <h3 className="text-md gap-2 flex items-center justify-center text-white/70">
