@@ -27,21 +27,12 @@ export default async function AppLayout({
   children: React.ReactNode;
 }>) {
   const session = await getServerSession(authOptions);
-  console.log("TEMPLATE :: session ==>>", session);
   if (!session) {
-    console.log("TEMPLATE :: Redirected");
     return redirect("/");
   }
 
   await DBConnect();
   const page = await Page.findOne({ owner: session.user?.email! });
-  console.log(
-    "TEMPLATE :: session.user?.email ==>>",
-    session.user?.email,
-    "\n",
-    "page ==>>",
-    page
-  );
 
   return (
     <html lang="en">
