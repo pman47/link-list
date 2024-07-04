@@ -5,7 +5,7 @@ interface LoadingProps {}
 
 const Loading: FC<LoadingProps> = ({}) => {
   return (
-    <div className="h-full w-full flex items-center justify-center">
+    <div className="fixed inset-0 flex items-center justify-center">
       <Loader />
     </div>
   );
