@@ -17,15 +17,18 @@ interface AccountProps {
 
 const Account: FC<AccountProps> = async ({ searchParams }) => {
   const session = await getServerSession(authOptions);
+  console.log("ACCOUNT :: session ==>>", session);
   const desiredUsername = searchParams.desiredUsername;
 
   if (!session) {
+    console.log("ACCOUNT :: REDIRECTED");
     redirect("/");
   }
 
   await DBConnect();
   if (session?.user?.email) {
     const page = await Page.findOne({ owner: session.user.email });
+    console.log("ACCOUNT :: page ==>>", page);
 
     const leanPage = JSON.parse(JSON.stringify(page));
 
